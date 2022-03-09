@@ -1,109 +1,110 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-
-    
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+      integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="backOffice.html">BackOffice</a>
-            </li>
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="index.html"
+              >Home <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="backOffice.html">BackOffice</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+        <h1 class="text-center">Adding items</h1>
+      <div class="row"  id="list">
+        <!-- <div class="col-12 col-md-3 col-xl-4 mx-auto" id="list">
            
-          </ul>
-        </div>
-      </nav>
-     <div class="container">
-         <div class="row">
-             <div class="col-12 col-md-6 mx-auto" >
-                <div class="card" id="list">
-                    <h1 class="text-center">Adding items</h1>
-                    <!-- <img src="..." class="card-img-top" alt="photo">
+          <div class="card" >
+           
+            <img src="..." class="card-img-top" alt="photo">
                     <div class="card-body">
                       <p class="card-text">${}</p>
                       <p class="card-text">${}</p>
                       <p class="card-text">${}</p>
                       <p class="card-text">${}</p>
-                    </div> -->
-                  </div>
-
-             </div>
-         </div>
-     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                    </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+<img src="" alt="">
     <script>
-const endPoint = "https://striveschool-api.herokuapp.com/api/product/"
-const list = document.getElementById("list")
+      const endPoint = "https://striveschool-api.herokuapp.com/api/product/";
 
+      async function fetchResult() {
+        const response = await fetch(endPoint, {
+          headers: {
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjI4Y2NhMDRlYTdiMTAwMTVkMDY3ZTkiLCJpYXQiOjE2NDY4NDA5OTIsImV4cCI6MTY0ODA1MDU5Mn0.5Nxt3lXdBL9DaNtSaxlnvHRxQGcpUnvN-si47Rq4s48",
+          },
+        });
+        const list = document.getElementById("list");
+        const data = await response.json();
 
+        list.innerHTML = data
+          .map((item) => 
 
-async function fetchResult() {
-
-const response = await fetch(endPoint)
-const data = await response.json()
-
-list.innerHTML = data.map(item =>{
-    `  
-                    <img src="..." class="card-img-top" alt="photo">
+            `   <div class="col-12 col-md-3 col-xl-4 mx-auto">
+            <div class="card">
+           
                     <div class="card-body">
-                      <p class="card-text">${item.imageURL}</p>
+                      <img src="${item.imageUrl}" class="card-text" >
                       <p class="card-text">${item.name}</p>
                       <p class="card-text">${item.description}</p>
                       <p class="card-text">${item.brand}</p>
+                      <p class="card-text">${item.price}</p>
+                    </div>
+                    </div>
                     </div>
                  `
+          )
+          .join(" ");
+      }
 
-}).join(' ')
-
-
-
-
-
-}
-
-
-
-window.onlanguagechange = fetchResult
-
-
-
-
-
+      window.onload = fetchResult;
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
-
-    
+    <script
+      src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
