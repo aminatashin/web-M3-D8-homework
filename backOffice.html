@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="backOffice.html">BackOffice</a>
+            </li>
+           
+          </ul>
+        </div>
+      </nav>
+      <div class="container">
+          <div class="row">
+              <div class="col-12 col-md-6 mx-auto">
+                  
+      <form class="d-flex flex-column" onsubmit="addItem(event)" >
+
+        <input class="form-control" type="text" placeholder="ImageURL">
+        <input class="form-control" type="text" placeholder="Name">
+        <input class="form-control" type="text" placeholder="description">
+        <input class="form-control" type="text" placeholder="Brand">
+        <input class="form-control" type="number" placeholder="Price">
+        <button type="submit" class="btn btn-primary btn-block mt-3 mx-auto">Add event</button>
+
+      </form>
+
+              </div>
+          </div>
+      </div>
+
+
+
+
+
+     <script>
+         const [imageURL, name, description, brand , price] = document.querySelectorAll('form input')
+
+
+
+     async function addItem(){
+        e.preventDefault()
+
+        const bodyObject={
+            imageURL: imageURL.value,
+            name: name.value,
+            description: description.value,
+            brand: brand.value,
+            price:price.value,
+
+
+        }
+    
+    const body = JSON.stringify(bodyObject)
+
+    const response = await fetch("https://striveschool-api.herokuapp.com/api/product/",
+    {
+
+        method: "POST",
+        headers:{
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjI4Y2NhMDRlYTdiMTAwMTVkMDY3ZTkiLCJpYXQiOjE2NDY4NDA5OTIsImV4cCI6MTY0ODA1MDU5Mn0.5Nxt3lXdBL9DaNtSaxlnvHRxQGcpUnvN-si47Rq4s48",
+
+            "Content-Type": "application/json"
+        },
+       body: body
+
+
+    })
+   
+    if(response.ok){
+        const data = await response.json()
+    }else{
+        alert("something is wrong")
+    }
+     }
+
+
+
+
+
+
+
+
+
+     </script>
+
+     
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
+    
+  </body>
+</html>
