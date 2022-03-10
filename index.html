@@ -59,7 +59,7 @@
         </div> -->
       </div>
     </div>
-
+<a href=""></a>
     <script>
       const endPoint = "https://striveschool-api.herokuapp.com/api/product/";
 
@@ -80,8 +80,13 @@
             <div class="card">
            
                     <div class="card-body">
+                      <a href="./backOffice.html?id=${item._id}">
+
                       <img src="${item.imageUrl}" class="card-text" >
-                      <p class="card-text">${item.name}</p>
+                    </a>
+                    <a href="./backOffice.html?id=${item._id}">
+                     ${item.name}
+                    </a>
                       <p class="card-text">${item.description}</p>
                       <p class="card-text">${item.brand}</p>
                       <p class="card-text">${item.price}</p>
